@@ -1,3 +1,3 @@
 # retronhosting for wgytcraft
-## this is like retronhosting but now for wgytcraft and sortof better®
+## _this is like retronhosting but now for wgytcraft and sortof better®_
 @retronbv ownes the retronhosting name
