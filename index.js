@@ -5,8 +5,8 @@ module.exports = function (host, res, req, error, version, ejs, config) {
         licensed under the mit license, 2021 William Horning (@wgyt)
         retronhosting is owned by @retronbv
     */
-   var dirname = config.pagedir
-   var page404 = config["404"]
+   var dirname = config.pagedir  // config file
+   var page404 = config["404"]  //  see setup.md
    doesitexist = fs.pathExists(`${dirname + res.url}.html`, (err, exists) => {console.log(err);return exists;})
    if (doesitexist){
        res.writeHead(200)
