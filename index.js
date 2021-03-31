@@ -1,29 +1,24 @@
-fs = require('fs-extra')
-module.exports = function (host, res, req, error, version, ejs, config) {
+const fs = require('fs-extra')
+module.exports = function (res, req) {
     /*!
-        retronhosting in wgytcraft
+        retronhosting in 1host.js
         licensed under the mit license, 2021 William Horning (@wgyt)
         retronhosting is owned by @retronbv
     */
-   var dirname = config.pagedir  // config file
-   var page404 = config["404"]  //  see setup.md
-   doesitexist = fs.pathExists(`${dirname + res.url}.html`, (err, exists) => {console.log(err);return exists;})
+   var dirname = `${__dirname}/pages`  // config file
+   var page404 = "404"
+   var doesitexist = fs.pathExists(`${dirname + res.url}.html`, (err, exists) => {console.log(err);return exists;})
    if (res.url.startsWith('/static/')){
-       if(doesitexist){
-           res.writeHead(200)
-           var e = res.url.split('/static/');
-           res.write(fs.readFileSync(`${dirname + e[1]}`, "utf8"))
-       }else{
-           res.writeHead(404)
-           res.write('404')
-       }
+       res.writeHead(200)
+       var e = res.url.split('/static/');
+       res.startFile(`${dirname + e[1]}`)
    }else{
        if (doesitexist){
            res.writeHead(200)
-           res.write(fs.readFileSync(`${dirname + res.url}.html`, "utf8"))
+           res.startFile`${dirname + res.url}.html`)
        }else{
-        res.writeHead(404)
-        res.write(fs.readFileSync(`${dirname + page404}.html`), "utf8")
+            res.writeHead(404)
+            res.startFile(`${dirname + page404}.html`)
        }    
    }
    res.end()
